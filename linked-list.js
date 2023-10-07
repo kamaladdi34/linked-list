@@ -60,7 +60,38 @@ class LinkedList {
     }
     return targetNode;
   }
-  contains(value) {}
+  contains(value) {
+    if (this.#size == 0) {
+      return false;
+    }
+    function check(node) {
+      if (node == null) {
+        return false;
+      }
+      if (node.value == value) {
+        return true;
+      } else {
+        return check(node.nextNode);
+      }
+    }
+    return check(this.#head);
+  }
+  find(value) {
+    if (this.#size == 0) {
+      return null;
+    }
+    function check(node, count = 0) {
+      if (node == null) {
+        return false;
+      }
+      if (node.value == value) {
+        return count;
+      } else {
+        return check(node.nextNode, ++count);
+      }
+    }
+    return check(this.#head);
+  }
 }
 let list = new LinkedList();
 list.appendNode(new Node("10"));
