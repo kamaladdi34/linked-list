@@ -9,9 +9,6 @@ class LinkedList {
   #size = 0;
   #head = null;
   #tail = null;
-  constructor() {
-    this.#size = 0;
-  }
   appendNode({ ...node }) {
     if (!this.#head) {
       this.#head = node;
@@ -35,6 +32,9 @@ class LinkedList {
     this.#size++;
   }
   pop() {
+    if (this.#size < 1) {
+      throw new Error("List is empty");
+    }
     this.#tail = this.#tail.previousNode;
     this.#tail.nextNode = null;
     this.#size--;
