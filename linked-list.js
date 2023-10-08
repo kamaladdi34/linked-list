@@ -92,8 +92,21 @@ class LinkedList {
     }
     return check(this.#head);
   }
+  toString() {
+    if (this.#size == 0) {
+      return "";
+    }
+    function nodeToString(node) {
+      if (node == null) {
+        return "(null)";
+      }
+      return `(${node.value}) => ${nodeToString(node.nextNode)}`;
+    }
+    return nodeToString(this.#head);
+  }
 }
 let list = new LinkedList();
 list.appendNode(new Node("10"));
 list.appendNode(new Node("20"));
 list.appendNode(new Node("30"));
+console.log(list.toString());
