@@ -155,15 +155,3 @@ class LinkedList {
     this.#size--;
   }
 }
-// testing:
-let list = new LinkedList();
-list.appendNode(new Node("1"));
-list.appendNode(new Node("2"));
-list.appendNode(new Node("3"));
-list.appendNode(new Node("4"));
-console.log(list.toString());
-list.insertAt("inserted", 2);
-console.log(list.toString());
-list.removeAt(1);
-console.log(list.toString());
-console.log(list.at(4));
