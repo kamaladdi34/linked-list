@@ -49,7 +49,7 @@ class LinkedList {
     return this.#tail;
   }
   at(index) {
-    if (index > this.#size || this.#size == 0) {
+    if (index >= this.#size || this.#size == 0) {
       throw new Error("Index out of range");
     }
     let targetNode = null;
@@ -166,9 +166,4 @@ list.insertAt("inserted", 2);
 console.log(list.toString());
 list.removeAt(1);
 console.log(list.toString());
-list.removeAt(1);
-console.log(list.toString());
-list.removeAt(1);
-console.log(list.toString());
-list.removeAt(1);
-console.log(list.toString());
+console.log(list.at(4));
