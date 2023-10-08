@@ -104,17 +104,24 @@ class LinkedList {
     }
     return nodeToString(this.#head);
   }
+  getNodeAt(index) {
+    if (index > this.#size - 1 || index < 0) {
+      throw new Error("Index out of range");
+    }
+    let node = null;
+    let counter = 0;
+    while (counter <= index) {
+      node = counter == 0 ? this.#head : node.nextNode;
+      counter++;
+    }
+    return node;
+  }
   insertAt(value, index) {
     if (index > this.#size - 1 || index < 0) {
       throw new Error("Index out of range");
     }
     let insertedNode = new Node(value);
-    let counter = 0;
-    let targetNode = null;
-    while (counter <= index) {
-      targetNode = counter == 0 ? this.#head : targetNode.nextNode;
-      counter++;
-    }
+    let targetNode = this.getNodeAt(index);
     insertedNode.previousNode = targetNode;
     insertedNode.nextNode = targetNode.nextNode ? targetNode.nextNode : null;
     if (targetNode.nextNode) {
@@ -128,12 +135,7 @@ class LinkedList {
     if (index > this.#size - 1 || index < 0) {
       throw new Error("Index out of range");
     }
-    let counter = 0;
-    let targetNode = null;
-    while (counter <= index) {
-      targetNode = counter == 0 ? this.#head : targetNode.nextNode;
-      counter++;
-    }
+    let targetNode = this.getNodeAt(index);
     if (index == 0) {
       this.#head = this.#head.nextNode;
     }
@@ -153,4 +155,20 @@ class LinkedList {
     this.#size--;
   }
 }
+// testing:
 let list = new LinkedList();
+list.appendNode(new Node("1"));
+list.appendNode(new Node("2"));
+list.appendNode(new Node("3"));
+list.appendNode(new Node("4"));
+console.log(list.toString());
+list.insertAt("inserted", 2);
+console.log(list.toString());
+list.removeAt(1);
+console.log(list.toString());
+list.removeAt(1);
+console.log(list.toString());
+list.removeAt(1);
+console.log(list.toString());
+list.removeAt(1);
+console.log(list.toString());
