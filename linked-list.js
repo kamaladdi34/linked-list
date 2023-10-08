@@ -121,14 +121,36 @@ class LinkedList {
       targetNode.nextNode.previousNode = insertedNode;
     }
     targetNode.nextNode = insertedNode;
+    this.#tail = this.#size - 1 == index ? targetNode : this.#tail;
+    this.#size++;
+  }
+  removeAt(index) {
+    if (index > this.#size - 1 || index < 0) {
+      throw new Error("Index out of range");
+    }
+    let counter = 0;
+    let targetNode = null;
+    while (counter <= index) {
+      targetNode = counter == 0 ? this.#head : targetNode.nextNode;
+      counter++;
+    }
+    if (index == 0) {
+      this.#head = this.#head.nextNode;
+    }
+    if (index == this.#size - 1) {
+      this.#tail = this.#tail.previousNode;
+    }
+    if (targetNode.nextNode) {
+      targetNode.nextNode.previousNode = targetNode.previousNode
+        ? targetNode.previousNode
+        : null;
+    }
+    if (targetNode.previousNode) {
+      targetNode.previousNode.nextNode = targetNode.nextNode
+        ? targetNode.nextNode
+        : null;
+    }
+    this.#size--;
   }
 }
 let list = new LinkedList();
-// testing:
-list.appendNode(new Node("10"));
-list.appendNode(new Node("20"));
-list.appendNode(new Node("30"));
-list.appendNode(new Node("40"));
-console.log(list.toString());
-list.insertAt("inserted", 0);
-console.log(list.toString());
